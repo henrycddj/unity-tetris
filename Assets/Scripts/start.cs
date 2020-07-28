@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class start : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //一些变量的定义
     private bool gameover;
     public Texture texture;
     public Rect buttonarea;
@@ -19,6 +19,7 @@ public class start : MonoBehaviour
     //public Texture play;
     //public GUIContent mycontent;
     public GUIStyle mystyle;
+    
     void Start()
     {
         gameover = true;
@@ -38,6 +39,7 @@ public class start : MonoBehaviour
                 grade = 0;
                 gameover = false;
                 toDelete = GameObject.FindGameObjectsWithTag("Blocks");
+                //删除所有方块
                 foreach(GameObject child in toDelete)
                 {
                     child.SendMessage("selfDelete");
@@ -53,11 +55,12 @@ public class start : MonoBehaviour
         GUI.Label(gradearea,"得分："+grade,mystyle);
 
     }
-    //产生一个新的Block
+    
     void addGrade()
     {
         ++grade;
     }
+    //产生一个新的Block
     void newAblock()
     {
         Instantiate(Blocks[Random.Range(0,Blocks.Length)],transform.position,Quaternion.identity);
