@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class foroneblock : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     //public Vector3 rotationPoint;
     public static int height = 24;
     public static int width = 10;
+    //标识空间是否被方块占用
     public static UnityEngine.Transform[,] bitmap = new UnityEngine.Transform[height, width];
     public GameObject startLocation;
     public bool gameOver;
@@ -67,7 +68,7 @@ public class foroneblock : MonoBehaviour
             }
         }
     }
-    
+    //检查是否有满的一行
     void checkFullLine()
     {
         for(int row = 0;row<height;++row)
@@ -75,8 +76,8 @@ public class foroneblock : MonoBehaviour
             if(checkLine(row))
             {
                 startLocation.SendMessage("addGrade");
-                deleteLine(row);
-                moveLines(row);
+                deleteLine(row);//删除该行
+                moveLines(row);//移动上面的方块
                 --row;
             }
         }
@@ -116,7 +117,7 @@ public class foroneblock : MonoBehaviour
         }
         return true;
     }
-
+    //根据方块的位置，设置标志
     void addbit()
     {
         foreach (UnityEngine.Transform child in transform)
@@ -127,6 +128,7 @@ public class foroneblock : MonoBehaviour
             bitmap[row, col] = child;
         }
     }
+    //移动的有效性
     bool moveValid()
     {
         foreach(UnityEngine.Transform child in transform)
@@ -147,7 +149,7 @@ public class foroneblock : MonoBehaviour
         return true;
     }
 
-
+    //删除此方块
     void selfDelete()
     {
         foreach (UnityEngine.Transform child in transform)
